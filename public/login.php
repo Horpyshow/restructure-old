@@ -192,83 +192,260 @@ $user_agent = htmlspecialchars(strip_tags($user_agent));
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Login | Wealth Creation ERP</title>
-  <link href="https://fonts.googleapis.com/css?family=Karla:400,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/materialdesignicons.min.css">
-  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-  <link rel="stylesheet" href="assets/css/login.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            'inter': ['Inter', 'sans-serif'],
+          },
+          colors: {
+            primary: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .login-bg {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    .glass-effect {
+      backdrop-filter: blur(16px) saturate(180%);
+      -webkit-backdrop-filter: blur(16px) saturate(180%);
+      background-color: rgba(255, 255, 255, 0.75);
+      border: 1px solid rgba(209, 213, 219, 0.3);
+    }
+    .input-focus:focus {
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+    .animate-fade-in {
+      animation: fadeIn 0.6s ease-in-out;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .animate-slide-in {
+      animation: slideIn 0.8s ease-out;
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(-30px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+  </style>
 </head>
-<body>
-  <main>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-6 login-section-wrapper">
-          <div class="brand-wrapper">
-            <img src="" alt="" class="logo">
-          </div>
-          <div class="login-wrapper my-auto">
-            <h1 class="login-title">Log in</h1>
-			<?php
-				if ( isset($ipError) ) {
-			?>
-			<div class="form-group form-group-sm">
-				<div class="alert alert-success">
-					<span class="glyphicon glyphicon-info-sign"></span> <?php echo @$ipError; ?>
-				</div>
-			</div>
-			<?php
-			}
-			?>
-			<?php
-				if ( isset($logError) ) {
-			?>
-			<div class="form-group form-group-sm">
-				<div class="alert alert-danger">
-					<span class="glyphicon glyphicon-info-sign"></span> <?php echo @$logError; ?>
-				</div>
-			</div>
-			<?php
-			}
-			?>     
-			<?php
-				if ( isset($errMSG) ) {
-			?>
-			<div class="form-group form-group-sm">
-				<div class="alert alert-danger">
-					<span class="glyphicon glyphicon-info-sign"></span> <?php echo @$errMSG; ?>
-				</div>
-			</div>
-			<?php
-			}
-			?>
-            <form method="post" class="form-horizontal" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>">
-			
-              <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" name="email" id="email" class="form-control" placeholder="official email address" value="<?php if (isset($_POST['btn_login'])) echo $email; ?>">
-				<div><span class="text-danger small"><?php echo @$emailError; ?></span></div>
-              </div>
-              <div class="form-group mb-4">
-                <label for="password">Password</label>
-                <input type="password" name="pass" id="password" class="form-control" placeholder="enter your passsword">
-				<div><span class="text-danger small"><?php echo @$passError; ?></span></div>
-              </div>
-              <!--<input name="btn_login" id="login" class="btn btn-block login-btn" type="button" value="Login">-->
-			  <button type="submit" class="btn btn-block login-btn" name="btn_login">
-							Login
-						</button>
-            </form>
-            <!--<a href="#!" class="forgot-password-link">Forgot password?</a>
-            <p class="login-wrapper-footer-text">Don't have an account? <a href="#!" class="text-reset">Register here</a></p>-->
+<body class="font-inter bg-gray-50 min-h-screen">
+  <div class="min-h-screen flex">
+    <!-- Left Side - Login Form -->
+    <div class="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
+      <div class="mx-auto w-full max-w-sm lg:w-96 animate-slide-in">
+        <!-- Logo/Brand Section -->
+        <div class="mb-8">
+          <div class="flex items-center space-x-3">
+            <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center">
+              <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-4m-5 0H3m2 0h4M9 7h6m-6 4h6m-6 4h6"></path>
+              </svg>
+            </div>
+            <div>
+              <h2 class="text-2xl font-bold text-gray-900">Wealth Creation</h2>
+              <p class="text-sm text-gray-600">ERP System</p>
+            </div>
           </div>
         </div>
-        <div class="col-sm-6 px-0 d-none d-sm-block">
-          <img src="assets/images/login.jpg" alt="login image" class="login-img">
+
+        <!-- Welcome Text -->
+        <div class="mb-8">
+          <h1 class="text-3xl font-bold text-gray-900 mb-2">Welcome back</h1>
+          <p class="text-gray-600">Please sign in to your account to continue</p>
+        </div>
+
+        <!-- Error Messages -->
+        <?php if (isset($ipError)): ?>
+        <div class="mb-4 p-4 bg-green-50 border border-green-200 rounded-lg animate-fade-in">
+          <div class="flex items-center">
+            <svg class="w-5 h-5 text-green-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path>
+            </svg>
+            <span class="text-green-800 text-sm"><?php echo @$ipError; ?></span>
+          </div>
+        </div>
+        <?php endif; ?>
+
+        <?php if (isset($logError)): ?>
+        <div class="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg animate-fade-in">
+          <div class="flex items-center">
+            <svg class="w-5 h-5 text-red-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+            </svg>
+            <span class="text-red-800 text-sm"><?php echo @$logError; ?></span>
+          </div>
+        </div>
+        <?php endif; ?>
+
+        <?php if (isset($errMSG)): ?>
+        <div class="mb-4 p-4 bg-red-50 border border-red-200 rounded-lg animate-fade-in">
+          <div class="flex items-center">
+            <svg class="w-5 h-5 text-red-400 mr-2" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path>
+            </svg>
+            <span class="text-red-800 text-sm"><?php echo @$errMSG; ?></span>
+          </div>
+        </div>
+        <?php endif; ?>
+
+        <!-- Login Form -->
+        <form method="post" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" class="space-y-6">
+          <div>
+            <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
+              Email Address
+            </label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 12a4 4 0 10-8 0 4 4 0 008 0zm0 0v1.5a2.5 2.5 0 005 0V12a9 9 0 10-9 9m4.5-1.206a8.959 8.959 0 01-4.5 1.207"></path>
+                </svg>
+              </div>
+              <input 
+                type="email" 
+                name="email" 
+                id="email" 
+                class="input-focus block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white" 
+                placeholder="Enter your official email address"
+                value="<?php if (isset($_POST['btn_login'])) echo $email; ?>"
+                required
+              >
+            </div>
+            <?php if (isset($emailError)): ?>
+            <p class="mt-1 text-sm text-red-600"><?php echo @$emailError; ?></p>
+            <?php endif; ?>
+          </div>
+
+          <div>
+            <label for="password" class="block text-sm font-medium text-gray-700 mb-2">
+              Password
+            </label>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                </svg>
+              </div>
+              <input 
+                type="password" 
+                name="pass" 
+                id="password" 
+                class="input-focus block w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white" 
+                placeholder="Enter your password"
+                required
+              >
+            </div>
+            <?php if (isset($passError)): ?>
+            <p class="mt-1 text-sm text-red-600"><?php echo @$passError; ?></p>
+            <?php endif; ?>
+          </div>
+
+          <div>
+            <button 
+              type="submit" 
+              name="btn_login"
+              class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-lg text-white bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98]"
+            >
+              <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+                <svg class="h-5 w-5 text-blue-300 group-hover:text-blue-200 transition-colors duration-200" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path>
+                </svg>
+              </span>
+              Sign In
+            </button>
+          </div>
+        </form>
+
+        <!-- Footer -->
+        <div class="mt-8 text-center">
+          <p class="text-xs text-gray-500">
+            © 2024 Wealth Creation ERP. All rights reserved.
+          </p>
         </div>
       </div>
     </div>
-  </main>
-  <script src="assets/js/jquery-3.4.1.min.js"></script>
-  <script src="assets/js/popper.min.js"></script>
-  <script src="assets/js/bootstrap.min.js"></script>
+
+    <!-- Right Side - Image -->
+    <div class="hidden lg:block relative w-0 flex-1">
+      <div class="absolute inset-0 login-bg">
+        <div class="absolute inset-0 bg-black bg-opacity-20"></div>
+        <img 
+          class="absolute inset-0 h-full w-full object-cover mix-blend-overlay" 
+          src="assets/images/login.jpg" 
+          alt="Wealth Creation ERP Login"
+        >
+        <div class="absolute inset-0 flex items-center justify-center">
+          <div class="text-center text-white px-8">
+            <div class="glass-effect rounded-2xl p-8 max-w-md animate-fade-in">
+              <h3 class="text-2xl font-bold mb-4 text-gray-800">Welcome to Wealth Creation ERP</h3>
+              <p class="text-gray-600 leading-relaxed">
+                Streamline your business operations with our comprehensive Enterprise Resource Planning system. 
+                Manage your resources efficiently and drive growth with powerful analytics and insights.
+              </p>
+              <div class="mt-6 flex justify-center space-x-4">
+                <div class="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+                <div class="w-2 h-2 bg-purple-500 rounded-full animate-pulse" style="animation-delay: 0.2s;"></div>
+                <div class="w-2 h-2 bg-blue-500 rounded-full animate-pulse" style="animation-delay: 0.4s;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading Overlay -->
+  <div id="loading-overlay" class="fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 hidden">
+    <div class="bg-white rounded-lg p-6 flex items-center space-x-4">
+      <div class="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
+      <span class="text-gray-700 font-medium">Signing you in...</span>
+    </div>
+  </div>
+
+  <script>
+    // Show loading overlay on form submission
+    document.querySelector('form').addEventListener('submit', function() {
+      document.getElementById('loading-overlay').classList.remove('hidden');
+    });
+
+    // Add subtle animations to form elements
+    document.addEventListener('DOMContentLoaded', function() {
+      const inputs = document.querySelectorAll('input');
+      inputs.forEach(input => {
+        input.addEventListener('focus', function() {
+          this.parentElement.classList.add('transform', 'scale-[1.02]');
+        });
+        input.addEventListener('blur', function() {
+          this.parentElement.classList.remove('transform', 'scale-[1.02]');
+        });
+      });
+    });
+
+    // Auto-hide alerts after 5 seconds
+    document.addEventListener('DOMContentLoaded', function() {
+      const alerts = document.querySelectorAll('.animate-fade-in');
+      alerts.forEach(alert => {
+        setTimeout(() => {
+          alert.style.opacity = '0';
+          alert.style.transform = 'translateY(-10px)';
+          setTimeout(() => alert.remove(), 300);
+        }, 5000);
+      });
+    });
+  </script>
 </body>
 </html>
